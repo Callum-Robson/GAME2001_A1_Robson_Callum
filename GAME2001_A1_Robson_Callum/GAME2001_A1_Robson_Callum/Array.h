@@ -95,6 +95,7 @@ public:
 	}
 
 	// Expansion
+protected:
 	bool Expand()
 	{
 		if (m_growSize <= 0)
@@ -118,8 +119,16 @@ public:
 
 		m_maxSize += m_growSize;
 
+		m_growSize += m_growSize;
+
 		return true;
 	}
-private:
 
+private:
+	// Private variables
+	T* m_array;		// Pointer to the beginning of the array
+
+	int m_maxSize; 		// Maxium size of the array
+	int m_growSize; 	// Amount the array can grow through expansion
+	int m_numElements;	// Number of items currently in my array
 };
