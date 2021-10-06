@@ -20,7 +20,7 @@ int main()
 
 	cout << endl << "Ordered array (duplicates not allowed): \n";
 
-	OrderedArray<int> numbers2(3, false);
+	OrderedArray<int> numbers2(3);
 	numbers2.push(5);
 	numbers2.push(2);
 	numbers2.push(7);

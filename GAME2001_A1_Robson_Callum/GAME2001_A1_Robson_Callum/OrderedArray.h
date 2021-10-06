@@ -5,7 +5,7 @@ template <class t>
 class OrderedArray : public Array<t>
 {
 public:
-	OrderedArray(int size, bool duplicatesFlag = true, int growBy = 1) : Array<t>(size, growBy)
+	OrderedArray(int size, bool duplicatesFlag = false, int growBy = 1) : Array<t>(size, growBy)
 	{
 		duplicatesAllowed = duplicatesFlag;
 	};
