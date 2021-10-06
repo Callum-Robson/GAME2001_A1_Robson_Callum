@@ -5,7 +5,10 @@ template <class t>
 class OrderedArray : public Array<t>
 {
 public:
-	OrderedArray(int size, int growBy = 1) : Array<t>(size, growBy) {};
+	OrderedArray(int size, bool duplicatesFlag = true, int growBy = 1) : Array<t>(size, growBy)
+	{
+		duplicatesAllowed = duplicatesFlag;
+	};
 
 	~OrderedArray() {};
 
@@ -26,17 +29,26 @@ public:
 				break;
 			}
 		}
-		//54:00
-		// Step 2: Shift everything to the right of the index(i) forward by one. Work backwards
-		for (k = Array<t>::m_numElements; k > i; k--)
+		if (duplicatesAllowed == false)
 		{
-			Array<t>::m_array[k] = Array<t>::m_array[k - 1];
+			if (search(val) < 0)
+				duplicatesFound = false;
+			else
+				duplicatesFound = true;
 		}
+		if (duplicatesAllowed == true || duplicatesFound == false)
+		{
+			// Step 2: Shift everything to the right of the index(i) forward by one. Work backwards
+			for (k = Array<t>::m_numElements; k > i; k--)
+			{
+				Array<t>::m_array[k] = Array<t>::m_array[k - 1];
+			}
 
-		// Step 3: Insert val into the array at index
-		Array<t>::m_array[i] = val;
+			// Step 3: Insert val into the array at index
+			Array<t>::m_array[i] = val;
 
-		Array<t>::m_numElements++;
+			Array<t>::m_numElements++;
+		}
 
 		//return i;
 	};
@@ -88,5 +100,9 @@ private:
 		}
 		return -1;
 	}
+
+private:
+	bool duplicatesAllowed;
+	bool duplicatesFound = false;
 
 };

@@ -1,19 +1,21 @@
 #pragma once
 #include <cassert>
+#include <string.h>
+
 
 template <class t>
 class Array
 {
 public:
 	// Constructor
-	Array(int size, int growBy = 1) :
+	Array(int size, int growBy = 2) :
 		m_array(NULL), m_maxSize(0), m_growSize(0), m_numElements(0)
 	{
 		if (size) // Is this a legal size for an array?	
 		{
 			m_maxSize = size;
 			m_array = new t[m_maxSize]; // Dynamically allocating an array to m_maxSize
-		//	memset(m_array, 0, sizeof(t) * m_maxSize); // Explicity set 0 to all elements in the array
+			memset(m_array, 0, sizeof(t) * m_maxSize); // Explicity set 0 to all elements in the array
 
 			m_growSize = ((growBy > 0 ? growBy : 0)); // ternary statement (fancy version of: if growBy > 0, set m_growSize to growBy, else set to 0
 		}
@@ -107,7 +109,7 @@ public:
 		assert(temp != nullptr);
 
 		// Copy the contents of the original array into the new array
-		//memcpy(temp, m_array, sizeof(t) * m_maxSize);
+		memcpy(temp, m_array, sizeof(t) * m_maxSize);
 
 		// Delete the old array
 		delete[] m_array;
