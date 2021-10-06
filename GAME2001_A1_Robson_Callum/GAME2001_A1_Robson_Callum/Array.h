@@ -12,8 +12,8 @@ public:
 		if (size) // Is this a legal size for an array?	
 		{
 			m_maxSize = size;
-			m_array = new T[m_maxSize]; // Dynamically allocating an array to m_maxSize
-			memset(m_array, 0, sizeof(T) * m_maxSize); // Explicity set 0 to all elements in the array
+			m_array = new t[m_maxSize]; // Dynamically allocating an array to m_maxSize
+		//	memset(m_array, 0, sizeof(t) * m_maxSize); // Explicity set 0 to all elements in the array
 
 			m_growSize = ((growBy > 0 ? growBy : 0)); // ternary statement (fancy version of: if growBy > 0, set m_growSize to growBy, else set to 0
 		}
@@ -28,7 +28,7 @@ public:
 		}
 	}
 
-	virtual void push(T val) = 0;
+	virtual void push(t val) = 0;
 	
 	void pop()
 	{
@@ -62,10 +62,10 @@ public:
 		m_numElements--;
 	}
 
-	virtual int search(T searchKey) = 0;
+	virtual int search(t searchKey) = 0;
 
 	// Overloaded [] operator
-	T& operator[](int index)
+	t& operator[](int index)
 	{
 		assert(m_array != nullptr && index < m_numElements);
 		return m_array[index];
@@ -95,7 +95,6 @@ public:
 	}
 
 	// Expansion
-protected:
 	bool Expand()
 	{
 		if (m_growSize <= 0)
@@ -104,11 +103,11 @@ protected:
 			return false;
 		}
 		// Create the new array
-		T* temp = new T[m_maxSize + m_growSize];
+		t* temp = new t[m_maxSize + m_growSize];
 		assert(temp != nullptr);
 
 		// Copy the contents of the original array into the new array
-		memcpy(temp, m_array, sizeof(T) * m_maxSize);
+		//memcpy(temp, m_array, sizeof(t) * m_maxSize);
 
 		// Delete the old array
 		delete[] m_array;
@@ -124,11 +123,11 @@ protected:
 		return true;
 	}
 
-private:
-	// Private variables
-	T* m_array;		// Pointer to the beginning of the array
+	//Protected variables
+	t* m_array;		// Pointer to the beginning of the array
 
 	int m_maxSize; 		// Maxium size of the array
 	int m_growSize; 	// Amount the array can grow through expansion
 	int m_numElements;	// Number of items currently in my array
 };
+

@@ -4,32 +4,38 @@
 template <class t>
 class UnorderedArray : public Array<t>
 {
-	void push(T val) override
-	{
-		assert(m_array != nullptr); // Debugging purposes
+public:
+	UnorderedArray(int size, int growBy = 1) : Array<t>(size, growBy) {};
 
-		if (m_numElements >= m_maxSize) // Check if the array has to expand to accomodate the new data.
+	~UnorderedArray() {};
+
+	void push(t val) override
+	{
+		assert(Array<t>::m_array != nullptr); // Debugging purposes
+
+		if (Array<t>::m_numElements >= Array<t>::m_maxSize) // Check if the array has to expand to accomodate the new data.
 		{
-			Expand();
+			Array<t>::Expand();
 		}
 
 		// My array has space for a new value. Let's add it!
-		m_array[m_numElements] = val;
-		m_numElements++;
+		Array<t>::m_array[Array<t>::m_numElements] = val;
+		Array<t>::m_numElements++;
 	};
 	 
-	int search(T searchKey) override
+	int search(t searchKey) override
 	{
-		assert(m_array != nullptr);
+		assert(Array<t>::m_array != nullptr);
 
 		// Brute-force Search
-		for (int i = 0; i < m_numElements; i++)
+		for (int i = 0; i < Array<t>::m_numElements; i++)
 		{
-			if (m_array[i] == val)
+			if (Array<t>::m_array[i] == searchKey)
 			{
 				return i; // Return the index of where the item is lovated in the array
 			}
 		}
 		return -1;
 	}
+
 };
