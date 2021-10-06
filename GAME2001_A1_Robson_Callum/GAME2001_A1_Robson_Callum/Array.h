@@ -17,7 +17,7 @@ public:
 
 			m_growSize = ((growBy > 0 ? growBy : 0)); // ternary statement (fancy version of: if growBy > 0, set m_growSize to growBy, else set to 0
 		}
-	}
+	};
 	// Destructor
 	~Array()
 	{
